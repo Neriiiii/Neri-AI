@@ -1,4 +1,4 @@
-# Neri AI — Technical Documentation
+# Neri AI - Technical Documentation
 
 > **Fully offline. Zero API cost. Runs on your own hardware.**
 > Built with Python, Ollama, FastAPI, and Pydantic.
@@ -94,7 +94,7 @@ local-ai-assistant/
 │
 ├── static/
 │   ├── index.html                # Legacy vanilla JS UI (kept as backup)
-│   └── dist/                     # Vite build output — served by FastAPI
+│   └── dist/                     # Vite build output - served by FastAPI
 │
 ├── prompts/
 │   └── prompt_set.json           # 26 standardized prompts for fair benchmarking
@@ -108,25 +108,25 @@ local-ai-assistant/
 
 ## 4. Installation & Setup
 
-### Step 1 — Install Ollama
+### Step 1 - Install Ollama
 
 Download from [https://ollama.com](https://ollama.com) (free and open source).
 
-### Step 2 — Pull Models
+### Step 2 - Pull Models
 
 ```bash
-ollama pull llama3.2       # ~2 GB  — fastest, recommended starting point
-ollama pull mistral:7b     # ~4 GB  — mid-tier speed and quality
-ollama pull phi4           # ~9 GB  — largest, slowest on consumer hardware
+ollama pull llama3.2       # ~2 GB  - fastest, recommended starting point
+ollama pull mistral:7b     # ~4 GB  - mid-tier speed and quality
+ollama pull phi4           # ~9 GB  - largest, slowest on consumer hardware
 ```
 
-### Step 3 — Install Python Dependencies
+### Step 3 - Install Python Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Step 4 — Build the Frontend
+### Step 4 - Build the Frontend
 
 ```bash
 cd frontend
@@ -144,21 +144,21 @@ npm run build
 uvicorn app:app --reload
 ```
 
-Open **http://localhost:8000** — FastAPI serves the pre-built React app from `static/dist/`.
+Open **http://localhost:8000** - FastAPI serves the pre-built React app from `static/dist/`.
 
 ### Development (hot-reload)
 
 Run two terminals simultaneously:
 
 ```bash
-# Terminal 1 — backend
+# Terminal 1 - backend
 uvicorn app:app --reload
 
-# Terminal 2 — frontend (instant UI updates)
+# Terminal 2 - frontend (instant UI updates)
 cd frontend && npm run dev
 ```
 
-Open **http://localhost:5173** — Vite proxies `/api/*` calls to FastAPI automatically.
+Open **http://localhost:5173** - Vite proxies `/api/*` calls to FastAPI automatically.
 
 ### CLI
 
@@ -175,10 +175,10 @@ python main.py structured --model llama3.2
 
 ### Settings Bar (top)
 
-- **Ollama status badge** — green "Online" / red "Offline", polls every 30 seconds
-- **Model selector** — auto-populated from installed Ollama models
-- **Temperature slider** — 0 (deterministic) to 1 (creative)
-- **Theme toggle** — dark ↔ light, saved to localStorage
+- **Ollama status badge** - green "Online" / red "Offline", polls every 30 seconds
+- **Model selector** - auto-populated from installed Ollama models
+- **Temperature slider** - 0 (deterministic) to 1 (creative)
+- **Theme toggle** - dark ↔ light, saved to localStorage
 
 ### Sidebar
 
@@ -237,11 +237,11 @@ Results saved to `results/<model>_<timestamp>.json` and `.csv`.
 | `POST` | `/api/benchmark`  | Runs benchmark, returns JSON results   |
 | `POST` | `/api/structured` | Returns Pydantic-validated JSON output |
 
-**POST /api/chat** — Request: `{ "model": "llama3.2", "message": "...", "temperature": 0.7 }` → Response: `text/event-stream` with `{"token": "..."}` chunks.
+**POST /api/chat** - Request: `{ "model": "llama3.2", "message": "...", "temperature": 0.7 }` → Response: `text/event-stream` with `{"token": "..."}` chunks.
 
-**POST /api/benchmark** — Request: `{ "model": "llama3.2", "limit": 5, "trials": 3, "temperature": 0.7 }` → Response: array of `{ tokens_per_second, time_to_first_token_ms, total_latency_ms }`.
+**POST /api/benchmark** - Request: `{ "model": "llama3.2", "limit": 5, "trials": 3, "temperature": 0.7 }` → Response: array of `{ tokens_per_second, time_to_first_token_ms, total_latency_ms }`.
 
-**POST /api/structured** — Request: `{ "model": "llama3.2", "prompt": "...", "temperature": 0.0 }` → Response: `{ "success": true, "data": { "title", "summary", "tags" } }`.
+**POST /api/structured** - Request: `{ "model": "llama3.2", "prompt": "...", "temperature": 0.0 }` → Response: `{ "success": true, "data": { "title", "summary", "tags" } }`.
 
 ---
 
@@ -302,19 +302,19 @@ Prompt categories: logical reasoning questions.
 
 | Model          | Avg TPS   | Avg TTFT   | Avg Latency | Size  | Usable?                |
 | -------------- | --------- | ---------- | ----------- | ----- | ---------------------- |
-| **llama3.2**   | **127.6** | **526 ms** | **2.4 s**   | ~2 GB | Yes — real-time        |
-| **mistral:7b** | 23.3      | ~230 ms    | 7.7 s       | ~4 GB | Yes — slight wait      |
+| **llama3.2**   | **127.6** | **526 ms** | **2.4 s**   | ~2 GB | Yes - real-time        |
+| **mistral:7b** | 23.3      | ~230 ms    | 7.7 s       | ~4 GB | Yes - slight wait      |
 | **phi4**       | 4.7       | ~2,571 ms  | **56 s**    | ~9 GB | Too slow on this HW    |
 
 ### Key Findings
 
-1. **llama3.2 dominates on speed** — at 127 TPS it is 5.5× faster than Mistral and 27× faster than Phi-4. Responses arrive in ~2 seconds, real-time in chat.
+1. **llama3.2 dominates on speed** - at 127 TPS it is 5.5× faster than Mistral and 27× faster than Phi-4. Responses arrive in ~2 seconds, real-time in chat.
 
-2. **Phi-4 is too large for this hardware** — at 4.7 TPS and up to 93 seconds per response, it is not practical on consumer hardware without a dedicated GPU (14B parameters, 2× the size of Mistral 7B).
+2. **Phi-4 is too large for this hardware** - at 4.7 TPS and up to 93 seconds per response, it is not practical on consumer hardware without a dedicated GPU (14B parameters, 2× the size of Mistral 7B).
 
-3. **Mistral 7B is a reasonable middle ground** — 7–8 second responses are noticeable but tolerable if output quality is prioritized over speed.
+3. **Mistral 7B is a reasonable middle ground** - 7–8 second responses are noticeable but tolerable if output quality is prioritized over speed.
 
-4. **Cold start penalty is real** — Mistral's first prompt had a 6.5s TTFT due to model loading into RAM. Subsequent prompts dropped to ~230ms. Always discard or note the first result.
+4. **Cold start penalty is real** - Mistral's first prompt had a 6.5s TTFT due to model loading into RAM. Subsequent prompts dropped to ~230ms. Always discard or note the first result.
 
 5. **Recommendation:** Use **llama3.2** for everyday use. Use **mistral:7b** only when quality justifies the wait. Avoid **phi4** without a GPU.
 
@@ -356,7 +356,7 @@ class AIResponse(BaseModel):
 
 ### Known Issue & Fix
 
-The original implementation passed `model_json_schema()` to the model — small models misinterpreted the verbose JSON Schema spec as the expected output format and returned the schema itself. **Fix:** system prompt now shows a plain field list + concrete example, which small models follow correctly.
+The original implementation passed `model_json_schema()` to the model - small models misinterpreted the verbose JSON Schema spec as the expected output format and returned the schema itself. **Fix:** system prompt now shows a plain field list + concrete example, which small models follow correctly.
 
 ---
 
@@ -370,7 +370,7 @@ The Web UI auto-discovers installed models via `GET /api/models`. For CLI, pass 
 
 | Model          | Command                      | Size    | Notes                           |
 | -------------- | ---------------------------- | ------- | ------------------------------- |
-| Llama 3.2 3B   | `ollama pull llama3.2:3b`    | ~2 GB   | Default — fastest               |
+| Llama 3.2 3B   | `ollama pull llama3.2:3b`    | ~2 GB   | Default - fastest               |
 | Gemma 2 2B     | `ollama pull gemma2:2b`      | ~1.6 GB | Very fast, good for low RAM     |
 | Qwen2.5 7B     | `ollama pull qwen2.5:7b`     | ~4 GB   | Strong reasoning                |
 | DeepSeek-R1 7B | `ollama pull deepseek-r1:7b` | ~4 GB   | Good for step-by-step reasoning |
@@ -382,14 +382,14 @@ The Web UI auto-discovers installed models via `GET /api/models`. For CLI, pass 
 | Issue | Fix |
 | ----- | --- |
 | `ConnectionError` / `Failed to connect to Ollama` | Run `ollama serve` |
-| Model not found | Run `ollama pull <model>` — list installed with `ollama list` |
+| Model not found | Run `ollama pull <model>` - list installed with `ollama list` |
 | Structured output keeps failing | Use `temperature = 0.0`; try a larger model |
 | Web UI shows blank page | Run `uvicorn` from the project root (where `app.py` lives) |
 | UI shows old vanilla JS page | Build the React app: `cd frontend && npm install && npm run build` |
-| `npm run build` fails with Node version error | Vite 5 requires Node ≥ 18 — check with `node -v` |
+| `npm run build` fails with Node version error | Vite 5 requires Node ≥ 18 - check with `node -v` |
 | UI changes not reflected | Rebuild: `cd frontend && npm run build`, or use dev mode (`npm run dev`, port 5173) |
-| Phi-4 takes forever | Expected — 14B model on CPU. Use llama3.2 instead |
-| Chat loses context | Fixed in current version — `app.py` uses `ollama.chat()` with full message history |
+| Phi-4 takes forever | Expected - 14B model on CPU. Use llama3.2 instead |
+| Chat loses context | Fixed in current version - `app.py` uses `ollama.chat()` with full message history |
 
 ---
 
