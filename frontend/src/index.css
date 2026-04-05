@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+    --sidebar: 210 40% 98%;
+    --sidebar-foreground: 222.2 84% 4.9%;
+    --sidebar-border: 214.3 31.8% 91.4%;
+  }
+
+  .dark {
+    --background:          0 0% 11%;
+    --foreground:          30 8% 90%;
+    --card:                0 0% 14%;
+    --card-foreground:     30 8% 90%;
+    --popover:             0 0% 12%;
+    --popover-foreground:  30 8% 90%;
+    --primary:             22 45% 42%;
+    --primary-foreground:  0 0% 98%;
+    --secondary:           0 0% 18%;
+    --secondary-foreground:30 8% 90%;
+    --muted:               0 0% 18%;
+    --muted-foreground:    0 0% 55%;
+    --accent:              0 0% 18%;
+    --accent-foreground:   30 8% 90%;
+    --destructive:         0 62.8% 35%;
+    --destructive-foreground: 0 0% 98%;
+    --border:              0 0% 20%;
+    --input:               0 0% 20%;
+    --ring:                22 45% 42%;
+    --sidebar:             0 0% 8%;
+    --sidebar-foreground:  30 8% 90%;
+    --sidebar-border:      0 0% 15%;
+  }
+}
+
+@layer base {
+  * { @apply border-border box-border; }
+  html, body, #root { height: 100%; }
+  body { @apply bg-background text-foreground m-0 overflow-hidden; }
+}
+
+/* Markdown prose inside chat bubbles */
+.prose-chat h1, .prose-chat h2, .prose-chat h3 { @apply font-semibold mt-3 mb-1; }
+.prose-chat h1 { @apply text-lg; }
+.prose-chat h2 { @apply text-base; }
+.prose-chat h3 { @apply text-sm; }
+.prose-chat p { @apply mb-2 leading-relaxed; }
+.prose-chat p:last-child { @apply mb-0; }
+.prose-chat ul { @apply list-disc pl-5 mb-2 space-y-1; }
+.prose-chat ol { @apply list-decimal pl-5 mb-2 space-y-1; }
+.prose-chat code:not(pre code) {
+  @apply bg-muted text-foreground rounded px-1 py-0.5 text-xs font-mono;
+}
+.prose-chat pre { @apply my-2 overflow-x-auto rounded-md; }
+.prose-chat blockquote {
+  @apply border-l-4 border-border pl-3 text-muted-foreground italic my-2;
+}
+.prose-chat a { @apply underline underline-offset-2; }
+.prose-chat strong { @apply font-semibold; }
+.prose-chat table { @apply w-full text-sm border-collapse my-2; }
+.prose-chat th, .prose-chat td { @apply border border-border px-3 py-1.5; }
+.prose-chat th { @apply bg-muted font-semibold; }
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { @apply bg-border rounded-full; }
