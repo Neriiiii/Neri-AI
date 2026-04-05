@@ -1,4 +1,4 @@
-# Neri AI — Technical Documentation
+# Neri AI - Technical Documentation
 
 > **Fully offline. Zero API cost. Runs on your own hardware.**
 > Built with Python, Ollama, FastAPI, and Pydantic.
