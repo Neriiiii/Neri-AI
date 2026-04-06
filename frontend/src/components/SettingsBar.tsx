@@ -41,13 +41,13 @@ export function SettingsBar({ model, temperature, onModelChange, onTemperatureCh
             {online === null ? (
               <Badge variant="secondary" className="gap-1"><Wifi className="h-3 w-3" />Checking…</Badge>
             ) : online ? (
-              <Badge variant="success" className="gap-1"><Wifi className="h-3 w-3" />Ollama Online</Badge>
+              <Badge variant="success" className="gap-1"><Wifi className="h-3 w-3" />Ollama Running</Badge>
             ) : (
-              <Badge variant="destructive" className="gap-1"><WifiOff className="h-3 w-3" />Ollama Offline</Badge>
+              <Badge variant="destructive" className="gap-1"><WifiOff className="h-3 w-3" />Ollama Stopped</Badge>
             )}
           </span>
         </TooltipTrigger>
-        <TooltipContent>Ollama server status (checked every 30s)</TooltipContent>
+        <TooltipContent>Ollama local server status (checked every 30s)</TooltipContent>
       </Tooltip>
 
       <Separator orientation="vertical" className="h-5" />
