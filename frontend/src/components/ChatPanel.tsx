@@ -46,16 +46,13 @@ export function ChatPanel({
   const scrollRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  // Sync messages when conversation prop changes (sidebar nav)
+  // Sync messages when conversation prop changes (sidebar nav).
+  // systemPrompt is already initialised from conversation.systemPrompt in useState
+  // and the component remounts (key={activeId}) when the conversation changes,
+  // so no need to call setSystemPrompt here.
   useEffect(() => {
     syncMessages(conversation.messages);
-    setSystemPrompt(conversation.systemPrompt ?? "");
-  }, [
-    conversation.id,
-    syncMessages,
-    conversation.messages,
-    conversation.systemPrompt,
-  ]);
+  }, [conversation.id, syncMessages, conversation.messages]);
 
   // Auto-scroll to bottom during streaming
   useEffect(() => {

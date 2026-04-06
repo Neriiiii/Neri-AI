@@ -4,18 +4,9 @@ import { Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { BenchmarkPanel } from "@/components/BenchmarkPanel";
 import { StructuredPanel } from "@/components/StructuredPanel";
 import { useAuth } from "@/context/AuthContext";
-
-const MODELS = ["llama3.2", "mistral:7b", "phi4"];
 
 function BentoCard({
   className = "",
@@ -230,8 +221,8 @@ function ThemeCard() {
 }
 
 export function SettingsPage() {
-  const [model, setModel] = useState("llama3.2");
-  const [temperature, setTemperature] = useState(0.7);
+  const model = "llama3.2";
+  const temperature = 0.7;
 
   return (
     <div className="flex-1 overflow-y-auto bg-background justify-center px-6 py-8">

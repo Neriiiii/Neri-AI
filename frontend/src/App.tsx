@@ -70,7 +70,7 @@ function Inner() {
     [activeId, model],
   )
 
-  const handleConversationUpdate = useCallback((_conv: Conversation) => {
+  const handleConversationUpdate = useCallback(() => {
     refresh()
   }, [refresh])
 
